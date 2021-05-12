@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Registration_UsersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="IDPerson" />
+    </Key>
+    <Property Name="IDPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="roleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="surName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="patronymic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Section" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_Person" FromRole="Person" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="IdRole" />
+    </Key>
+    <Property Name="IdRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="roleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IDShedule" Type="Int32" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_Role" FromRole="Role" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="schedule_training">
+    <Key>
+      <PropertyRef Name="IDShedule" />
+    </Key>
+    <Property Name="IDShedule" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="section" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="schedule" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="trainer" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="passwrd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IDRole" Type="Int32" Nullable="false" />
+    <Property Name="IDPerson" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Users_Person" FromRole="Users" ToRole="Person" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_Users_Role" FromRole="Users" ToRole="Role" />
+    <Property Name="phoneNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Users_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="IDPerson" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="IDPerson" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="IdRole" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="IDRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Registration_UsersEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Person" EntityType="Self.Person" />
+    <EntitySet Name="Role" EntityType="Self.Role" />
+    <EntitySet Name="schedule_training" EntityType="Self.schedule_training" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_Users_Person" Association="Self.FK_Users_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Role" Association="Self.FK_Users_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

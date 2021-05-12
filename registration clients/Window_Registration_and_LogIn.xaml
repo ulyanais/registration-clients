@@ -1,0 +1,79 @@
+﻿<Window x:Class="registration_clients.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:registration_clients"
+        mc:Ignorable="d"
+         Title="Sport club" Height="600" Width="900" ResizeMode="NoResize" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="clientsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Person}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Image Source="footer.jpg" Stretch="UniformToFill"/>
+
+        <!--Вход в систему-->
+        <GroupBox x:Name="Input" Header="Вход в систему" Height="350" Width="301" FontSize="15" Background="{x:Null}" Foreground="White" HorizontalAlignment="Center">
+            <StackPanel Width="200" Height="300" HorizontalAlignment="Center" DataContext="{StaticResource clientsViewSource}">
+                <TextBox Height="20" VerticalAlignment="Top" Margin="0 50 0 0" FontSize="12" Padding="0 0 0 1" x:Name="UserNumberPhone" Text="{Binding Mode=OneWay}" PreviewTextInput="Telephone_PreviewTextInput">
+                    <TextBox.ToolTip>
+                        Номер телефона
+                    </TextBox.ToolTip>
+                </TextBox>
+                <TextBox x:Name="Password" Height="20" VerticalAlignment="Top" Margin="0 30 0 20" FontSize="12" Padding="0 0 0 1" Text="{Binding Mode=OneWay}">
+                    <TextBox.ToolTip>
+                        Пароль
+                    </TextBox.ToolTip>
+                </TextBox>
+                <Button Click="LogIn_button" Width="100" Height="25" Command="{Binding}">Войти</Button>
+                <TextBlock Margin="0 20 0 0" TextWrapping="Wrap" Width="170">
+                    <Run>Не зарегистрирован? Ну так зарегистрируйся!</Run>
+                </TextBlock>
+                <Button Click="WindowRegistration" Width="100" Height="25" Margin="0 20 0 0" Padding="1 0 0 0">Регистрация</Button>
+            </StackPanel>
+        </GroupBox>
+        <Frame x:Name="frame" Navigated="frame_Navigated"/>
+        <!--Окно регистрации-->
+        <GroupBox x:Name="InputNewUser" Header="Регистрация пользователя" Height="320" Width="201" FontSize="15" Background="{x:Null}" Foreground="White" HorizontalAlignment="Center" Visibility="Collapsed">
+            <StackPanel Width="190" Height="300" HorizontalAlignment="Center" DataContext="{StaticResource clientsViewSource}">
+                <TextBox x:Name="NameBox" Height="20" VerticalAlignment="Top" Margin="0 20 0 10" FontSize="12" Padding="0 0 0 1" Text="{Binding Mode=OneWay}"    >
+                    <TextBox.ToolTip>
+                        Имя
+                    </TextBox.ToolTip>
+                </TextBox>
+                <TextBox x:Name="surNameBox" Height="20" VerticalAlignment="Top" Margin="0 10" FontSize="12" Padding="0 0 0 1" Text="{Binding Mode=OneWay}">
+                    <TextBox.ToolTip>
+                        Фамилия
+                    </TextBox.ToolTip>
+                </TextBox>
+                <TextBox x:Name="PatronymicBox" Height="20" VerticalAlignment="Top" Margin="0 10" FontSize="12" Padding="0 0 0 1" Text="{Binding Mode=OneWay}">
+                    <TextBox.ToolTip>
+                        Отчество
+                    </TextBox.ToolTip>
+                </TextBox>
+                <TextBox x:Name="TelephoneBox" Height="20" VerticalAlignment="Top" Margin="0 10" FontSize="12" Padding="0 0 0 1" Text="{Binding Mode=OneWay}" PreviewTextInput="Telephone_PreviewTextInput">
+                    <TextBox.ToolTip>
+                        Номер телефона
+                    </TextBox.ToolTip>
+                </TextBox>
+                <TextBox x:Name="PasswordBox" Height="20" VerticalAlignment="Top" Margin="0 10" FontSize="12" Padding="0 0 0 1" Text="{Binding Mode=OneWay}">
+                    <TextBox.ToolTip>
+                        пАрОль
+                    </TextBox.ToolTip>
+                </TextBox>
+                <ComboBox x:Name="sections" Height="21" VerticalAlignment="Top" Margin="0 10" FontSize="12" Text="{Binding Mode=OneWay}">
+                    <ComboBoxItem>Танцы</ComboBoxItem>
+                    <ComboBoxItem>Групповые тренировки</ComboBoxItem>
+                    <ComboBoxItem>ФитнASS</ComboBoxItem>
+                    <ComboBoxItem>Йога</ComboBoxItem>
+                    <ComboBoxItem>Стретчинг</ComboBoxItem>
+                    <ComboBoxItem>TRX</ComboBoxItem>
+                </ComboBox>
+                <Button Click="GetRegistr" Width="100" Height="25" Margin="0 10 0 0">Войти</Button>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>

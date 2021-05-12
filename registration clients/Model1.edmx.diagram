@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eb2cdfb9c94e4f229fe4f9fab9bbc9be" Name="Diagram1">
+        <EntityTypeShape EntityType="Registration_UsersModel.Person" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registration_UsersModel.Role" Width="1.5" PointX="2.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registration_UsersModel.schedule_training" Width="1.5" PointX="5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registration_UsersModel.sysdiagrams" Width="1.5" PointX="5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registration_UsersModel.Users" Width="1.5" PointX="2.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="Registration_UsersModel.FK_Users_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="Registration_UsersModel.FK_Users_Role" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
